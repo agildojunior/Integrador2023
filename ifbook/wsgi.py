@@ -1,5 +1,5 @@
 """
-WSGI config for integrador project.
+WSGI config for ifbook project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'integrador.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ifbook.settings')
 
 application = get_wsgi_application()
