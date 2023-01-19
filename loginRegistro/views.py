@@ -54,6 +54,10 @@ def compras(request):
 def perfil(request): 
     return render(request, 'perfil/perfil.html')
 
+# @login_required(login_url="/auth/login/")
+def produtos(request): 
+    return render(request, 'produtos/produtos.html')
+
 @login_required
 def deslogar(request):
     logout(request)
