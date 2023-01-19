@@ -42,6 +42,18 @@ def logar(request):
 def inicio(request): 
     return render(request, 'inicio/inicio.html')
 
+# @login_required(login_url="/auth/login/")
+def carrinho(request): 
+    return render(request, 'carrinho/carrinho.html')
+
+# @login_required(login_url="/auth/login/")
+def compras(request): 
+    return render(request, 'compras/compras.html')
+
+# @login_required(login_url="/auth/login/")
+def perfil(request): 
+    return render(request, 'perfil/perfil.html')
+
 @login_required
 def deslogar(request):
     logout(request)
