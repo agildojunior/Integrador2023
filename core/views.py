@@ -58,6 +58,10 @@ def perfil(request):
 def produtos(request): 
     return render(request, 'produtos/produtos.html')
 
+# @login_required(login_url="/auth/login/")
+def produtosAdd(request): 
+    return render(request, 'produtos/adicionar.html')
+
 @login_required
 def deslogar(request):
     logout(request)
