@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from apps.core import views
 
 urlpatterns = [
     path('cadastro/', views.cadastro, name='cadastro'), 
