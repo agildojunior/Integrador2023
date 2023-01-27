@@ -4,6 +4,6 @@ from apps.core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include('apps.core.urls')),
+    path('ifbook/', include('apps.books.urls')),
     path('', views.inicio, name='inicio'),
 ]

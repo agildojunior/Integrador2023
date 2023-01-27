@@ -11,7 +11,7 @@ class Book(models.Model):
 
     name = models.CharField(verbose_name="Nome", max_length=255, blank=True)
     quantity_pages = models.CharField(verbose_name="Quantidade de Pg.", max_length=255)
-    book_cover = models.ImageField(verbose_name="Capa", upload_to="images/")
+    book_cover = models.ImageField(verbose_name="Capa", upload_to="images/", blank=True, null=True)
     status_book = models.CharField(
         verbose_name="Status",
         max_length=1,

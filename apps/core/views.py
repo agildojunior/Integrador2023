@@ -60,7 +60,7 @@ def produtos(request):
 
 # @login_required(login_url="/auth/login/")
 def produtosAdd(request): 
-    return render(request, 'produtos/adicionar.html')
+    return render(request, 'adicionarLivro.html')
 
 @login_required
 def deslogar(request):

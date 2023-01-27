@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFBook</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    {% include 'components/navbar.html' %}
+
+    <main class="flex-fill">
+        <form class="container" method="POST">
+            <section class="section">
+                    <div class="section-body">
+                        <h2 class="section-title">Deletar Livro</h2>
+                        <p class="section-lead">
+                            Uma vez excluido não poderá mais ser recuperado:
+                        </p>
+                    </div>
+                    <div class="center">
+                        <form method="post">
+                            {% csrf_token %}
+                            <h4>Excluir o Livro {{object.name}}?</h4>
+                            <p>Você tem certeza em excluir {{object.name}}?</p>
+                            <p class="form-buttons">
+                                <input type="submit" class="btn btn-primary" value="Delete">
+                                <a href="{% url 'livros' %}" class="btn btn-outline">Cancel</a>
+                            </p>
+                        </form>
+                    </div>
+            </section>
+        </form>
+    </main>
+
+    {% include 'components/footer.html' %}
+
+</body> 
+
+</html>
+<style>
+    html {
+        height: 100%;
+        min-height: 100%;
+    }
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+    }
+</style>
