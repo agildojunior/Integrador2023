@@ -21,7 +21,7 @@ class BookDetailView(DetailView):
 class BookCreateView(CreateView):
     model = Book
     form_class = BookForm
-    template_name = 'book/adicionar.html'
+    template_name = 'book/adicionar_livro.html'
     success_url = reverse_lazy("livros")
     
     def form_valid(self, form):

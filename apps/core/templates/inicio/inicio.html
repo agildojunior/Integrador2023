@@ -17,55 +17,39 @@
     <main class="flex-fill">
         <div class="container">
             <div class="row">
-
+                {% for livro in livros %}
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
                         <img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="{% static 'img/produto.png' %}">
                         <div class="card-body">
-                            <h5>Nome do livro</h5>
-                            <p class="card-text">texto dahora texto dahora texto dahora texto dahora texto dahora texto dahora.</p>
+                            <h5>{{livro.name}}</h5>
+                            <p class="card-text">{{livro.synopsis}}</p>
+                            <h6 class="card-text">R$: {{livro.price}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-dark">Adicionar ao carrinho</button>
                                 </div>
-                                <small class="text-muted">99 disponiveis</small>
+                                <small class="text-muted">{{livro.quantity}} disponiveis</small>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="{% static 'img/produto.png' %}">
-                        <div class="card-body">
-                            <h5>Nome do livro</h5>
-                            <p class="card-text">texto dahora texto dahora texto dahora texto dahora texto dahora texto dahora.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-dark">Adicionar ao carrinho</button>
-                                </div>
-                                <small class="text-muted">99 disponiveis</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="{% static 'img/produto.png' %}">
-                        <div class="card-body">
-                            <h5>Nome do livro</h5>
-                            <p class="card-text">texto dahora texto dahora texto dahora texto dahora texto dahora texto dahora.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-dark">Adicionar ao carrinho</button>
-                                </div>
-                                <small class="text-muted">99 disponiveis</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
+                {% endfor %}
+            </div>
+            <div class="pagination" style="margin: 20px;">
+                <span class="step-links">
+                    {% if livros.has_previous %}
+                        <a class="btn btn-outline-dark" href="?page=1">&laquo; Primeira Pagina</a>
+                        <a class="btn btn-outline-dark" href="?page={{ livros.previous_page_number }}">Anterior</a>
+                    {% endif %}
+                    <span class="btn btn-outline-dark">
+                        Pagina {{ livros.number }} de {{ livros.paginator.num_pages }}
+                    </span>
+                    {% if livross.has_next %}
+                        <a class="btn btn-outline-dark" href="?page={{ livros.next_page_number }}">Proxima</a>
+                        <a class="btn btn-outline-dark" href="?page={{ livros.paginator.num_pages }}">Ultima Pagina &raquo;</a>
+                    {% endif %}
+                </span>
             </div>
         </div>
     </main>

@@ -4,6 +4,8 @@ from apps.account.models.user import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.core.paginator import Paginator
+from apps.books.models import Book
 
 def cadastro(request):
     if request.method == 'GET':
@@ -38,27 +40,37 @@ def logar(request):
         else:
             return render(request, 'login/login.html')
 
-# @login_required(login_url="/auth/login/")
+# @login_required(login_url="/ifbook/login/")
 def inicio(request): 
-    return render(request, 'inicio/inicio.html')
+    livross = Book.objects.all()
+    
+    # --- paginação ---
+    paginator1 = Paginator(livross, 12)
+    page_number = request.GET.get('page')
+    livros = paginator1.get_page(page_number)
 
-# @login_required(login_url="/auth/login/")
+    context = {
+        'livros':livros,
+    }
+    return render(request, 'inicio/inicio.html',context)
+
+# @login_required(login_url="/ifbook/login/")
 def carrinho(request): 
     return render(request, 'carrinho/carrinho.html')
 
-# @login_required(login_url="/auth/login/")
+# @login_required(login_url="/ifbook/login/")
 def compras(request): 
     return render(request, 'compras/compras.html')
 
-# @login_required(login_url="/auth/login/")
+# @login_required(login_url="/ifbook/login/")
 def perfil(request): 
     return render(request, 'perfil/perfil.html')
 
-# @login_required(login_url="/auth/login/")
+# @login_required(login_url="/ifbook/login/")
 def produtos(request): 
     return render(request, 'produtos/produtos.html')
 
-# @login_required(login_url="/auth/login/")
+# @login_required(login_url="/ifbook/login/")
 def produtosAdd(request): 
     return render(request, 'adicionarLivro.html')
 
