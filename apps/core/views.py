@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from apps.books.models import Book
+from apps.books.models import Book, Category
 
 def cadastro(request):
     if request.method == 'GET':
@@ -78,3 +78,30 @@ def produtosAdd(request):
 def deslogar(request):
     logout(request)
     return redirect('inicio')
+
+@login_required
+def livrosEdit(request, id):
+    livro = Book.objects.filter(id=id).first()
+    category = Category.objects.all
+    context = {
+        'livro':livro,
+        'category':category,
+    }
+    return render(request, 'book/editar_Livro.html',context)
+@login_required
+def livrosEdit2(request, id):
+    # idcategoria = request.POST.get('categoria')
+    # categoria = Categoria.objects.filter( id = idcategoria ).first()
+    Book.objects.filter(id=id).update(
+        name=request.POST.get('name'),
+        quantity_pages=request.POST.get('quantity_pages'),
+        note=request.POST.get('note'),
+        year=request.POST.get('year'),
+        price=request.POST.get('price'),
+        quantity=request.POST.get('quantity'),
+        synopsis=request.POST.get('synopsis'),
+        status_book=request.POST.get('status_book'),
+        publishing_company= request.POST.get('publishing_company'),
+        category= request.POST.get('category'),
+    )
+    return redirect('livros')
