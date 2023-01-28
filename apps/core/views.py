@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.core.paginator import Paginator
 from apps.books.models import Book, Category
+from apps.books.models.cart import Cart
 
 def cadastro(request):
     if request.method == 'GET':
@@ -22,6 +23,8 @@ def cadastro(request):
 
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
+        carrinho = Cart.objects.create(user = user)
+        carrinho.save()
 
         return render(request, 'login/login.html')
 

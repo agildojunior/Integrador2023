@@ -18,29 +18,24 @@
         <form class="container" method="POST">
         {% csrf_token %}
             <br>
-            <h1>Adicionar Produto</h1>
+                <h1>Adicionar Livro</h1>
             <br>
-            {% comment %} <div class="row my-3">
+            <div class="row my-3">
                 <div class="col-md-4">
                     <div class="form-floating mb-3">
-                        {{form.name}}
-                        <label for="codigo">Nome</label>
+                        {{ form.name }}
+                        <label for="name">Nome do livro</label>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="quantity_pages" id="codigo" placeholder="teste" value="">
-                        <label for="codigo">teste</label>
-                    </div>
+                    {% comment %} ver meio de adicionar imagem depois, não está funcionando ainda {% endcomment %}
+                    <label for="book_cover" class="form-control">Escolha uma imagen.</label>
+                    <input class="form-control form-control-sm" id="book_cover" name="book_cover" type="file">
                 </div>
                 <div class="col-md-4">
-                    <label for="formFileSm" class="form-control">Small file input example</label>
-                    <input class="form-control form-control-sm" id="formFileSm" name="book_cover"  type="file">
-                  </div>
-                <div class="col-md-4">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="book_cover" id="codigo" placeholder="teste" value="">
-                        <label for="codigo">teste</label>
+                        {{ form.quantity_pages }}
+                        <label for="quantity_pages">Paginas</label>
                     </div>
                 </div>
             </div>
@@ -48,54 +43,53 @@
             <div class="row my-3">
                 <div class="col-md-3">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="status_book" id="codigo" placeholder="teste" value="">
-                        <label for="codigo">teste</label>
+                        {{ form.status_book }}
+                        <label for="status_book">Status</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="note" id="codigo" placeholder="teste" value="">
-                        <label for="codigo">teste</label>
+                        {{ form.note }}
+                        <label for="note">Observação</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="year" id="codigo" placeholder="teste" value="">
-                        <label for="codigo">teste</label>
+                        {{ form.year }}
+                        <label for="year">Ano</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="price" id="codigo" placeholder="teste" value="">
-                        <label for="codigo">teste</label>
+                        {{ form.price }}
+                        <label for="price">Preço</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="quantity" id="codigo" placeholder="teste" value="">
-                        <label for="codigo">teste</label>
+                        {{ form.quantity }}
+                        <label for="quantity">Quantidade</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="synopsis" id="codigo" placeholder="teste" value="">
-                        <label for="codigo">teste</label>
+                        {{ form.synopsis }}
+                        <label for="synopsis">Sinopse</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="publishing_company" id="codigo" placeholder="teste" value="">
-                        <label for="codigo">teste</label>
+                        {{ form.publishing_company }}
+                        <label for="publishing_company">Editora</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-floating mb-3">
-                        <input class="form-control" type="text" name="category" id="codigo" placeholder="teste" value="">
-                        <label for="codigo">teste</label>
-                    </div>
+                        {{form.category}}
+                        <label for="category">Categoria</label>
+                    </div>    
                 </div>
-            </div> {% endcomment %}
-            {{form.as_p}}
+            </div> 
             <div class="d-flex justify-content-end">
                 <button type="submit" style="width: 200px; height: 50px;" class="btn btn-outline-success me-3 mb-4"><i
                         class="mdi mdi-check me-1"></i>Salvar</button>

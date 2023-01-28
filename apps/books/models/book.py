@@ -4,9 +4,9 @@ from apps.account.models import User
 
 class Book(models.Model):
     STATUS_CHOICES = (
-        ("1", "Novo"),
-        ("2", "Usado"),
-        ("3", "Seminovo"),
+        ("Novo", "Novo"),
+        ("Usado", "Usado"),
+        ("Seminovo", "Seminovo"),
     )
 
     name = models.CharField(verbose_name="Nome", max_length=255, blank=True)
@@ -14,7 +14,7 @@ class Book(models.Model):
     book_cover = models.ImageField(verbose_name="Capa", upload_to="images/", blank=True, null=True)
     status_book = models.CharField(
         verbose_name="Status",
-        max_length=1,
+        max_length=10,
         choices=STATUS_CHOICES,
         blank=False,
         null=False,
