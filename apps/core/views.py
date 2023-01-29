@@ -1,5 +1,6 @@
 from django.http.response import  HttpResponse
 from django.shortcuts import render, redirect
+from apps.books.models.book import Book_Cart
 from apps.account.models.user import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -45,21 +46,31 @@ def logar(request):
 
 # @login_required(login_url="/ifbook/login/")
 def inicio(request): 
-    livross = Book.objects.all()
+    livross = Book.objects.filter().order_by('name')
     
     # --- paginação ---
     paginator1 = Paginator(livross, 12)
     page_number = request.GET.get('page')
-    livros = paginator1.get_page(page_number)
+    page_obj1 = paginator1.get_page(page_number)
 
     context = {
-        'livros':livros,
+        'livros': page_obj1,
     }
-    return render(request, 'inicio/inicio.html',context)
+    return render(request, 'inicio/inicio.html', context)
 
 # @login_required(login_url="/ifbook/login/")
-def carrinho(request): 
-    return render(request, 'carrinho/carrinho.html')
+def carrinho(request):
+    carrinhoUsuario = Cart.objects.get(user=request.user.id)
+    carrinhoLivros = Book_Cart.objects.filter(cart=carrinhoUsuario)
+    valor = 0
+    for livro in carrinhoLivros:
+        valor += float(livro.book.price)
+    
+    context = {
+        'livroCarrinho': carrinhoLivros,
+        'valor': valor,
+    }
+    return render(request, 'carrinho/carrinho.html', context)
 
 # @login_required(login_url="/ifbook/login/")
 def compras(request): 
@@ -108,3 +119,30 @@ def livrosEdit2(request, id):
         category= request.POST.get('category'),
     )
     return redirect('livros')
+
+@login_required
+def add_book_in_cart(request, id_book):
+    book = Book.objects.get(id=id_book)
+    user = User.objects.get(id=request.user.id)
+    cart = Cart.objects.get(user=user)
+    
+    cartBooks = Book_Cart.objects.filter(cart=cart)
+    for livro in cartBooks:
+        if livro.book.id == book.id:
+            return redirect('carrinho')
+     
+    book_cart = Book_Cart.objects.create(book=book, cart=cart)   
+    book_cart.save()
+    
+    return redirect('carrinho')
+
+
+@login_required
+def delete_book_in_cart(request, id_book):
+    carrinho = Cart.objects.get(user=request.user.id)
+    book = Book.objects.get(id=id_book)
+    cartBook = Book_Cart.objects.filter(book=book, cart=carrinho).first()
+    
+    cartBook.delete()
+    
+    return redirect('carrinho')

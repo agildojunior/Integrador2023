@@ -26,8 +26,9 @@
                             <p class="card-text">{{livro.synopsis}}</p>
                             <h6 class="card-text">R$: {{livro.price}}</p>
                             <div class="d-flex justify-content-between align-items-center">
+                                {% csrf_token %}
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-dark">Adicionar ao carrinho</button>
+                                    <a type="button" class="btn btn-sm btn-outline-dark" href="{% url 'adicionarCarrinho' livro.id %}">Adicionar ao carrinho</a>
                                 </div>
                                 <small class="text-muted">{{livro.quantity}} disponiveis</small>
                             </div>
@@ -39,15 +40,15 @@
             <div class="pagination" style="margin: 20px;">
                 <span class="step-links">
                     {% if livros.has_previous %}
-                        <a class="btn btn-outline-dark" href="?page=1">&laquo; Primeira Pagina</a>
+                        <a class="btn btn-outline-dark" href="?page=1">&laquo; Primeira Página</a>
                         <a class="btn btn-outline-dark" href="?page={{ livros.previous_page_number }}">Anterior</a>
                     {% endif %}
-                    <span class="btn btn-outline-dark">
-                        Pagina {{ livros.number }} de {{ livros.paginator.num_pages }}
+                    <span class="btn btn-outline-dark" >
+                        Página {{ livros.number }} de {{ livros.paginator.num_pages }}
                     </span>
-                    {% if livross.has_next %}
-                        <a class="btn btn-outline-dark" href="?page={{ livros.next_page_number }}">Proxima</a>
-                        <a class="btn btn-outline-dark" href="?page={{ livros.paginator.num_pages }}">Ultima Pagina &raquo;</a>
+                    {% if livros.has_next %}
+                        <a class="btn btn-outline-dark" href="?page={{ livros.next_page_number }}">Próxima</a>
+                        <a class="btn btn-outline-dark" href="?page={{ livros.paginator.num_pages }}">Última Página &raquo;</a>
                     {% endif %}
                 </span>
             </div>
