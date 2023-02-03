@@ -1,5 +1,5 @@
 from django.db import models
-from apps.account.models import User
+from account.models import User
 
 class Cart(models.Model):
     user = models.OneToOneField(

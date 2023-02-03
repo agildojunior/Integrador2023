@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, DetailView, CreateView, UpdateView, DeleteView
-from apps.books.models import Book
-from apps.books.forms import BookForm
+from books.models import Book
+from books.forms import BookForm
 
 class BookListView(TemplateView):
     template_name = "book/livro.html"

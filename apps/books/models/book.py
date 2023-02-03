@@ -1,5 +1,5 @@
 from django.db import models
-from apps.account.models import User
+from account.models import User
 
 
 class Book(models.Model):
@@ -34,12 +34,16 @@ class Book(models.Model):
     
     def __str__(self):
         return self.name
+    
+    class Meta:
+        app_label = 'books'
 
 # Tabela auxiliar para relação de N pra N livros e carrinho
 class Book_Cart(models.Model):
-    book = models.ForeignKey("Book", verbose_name="Livro", on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, verbose_name="Livro", on_delete=models.CASCADE)
     cart = models.ForeignKey("Cart", verbose_name="Carrinho", on_delete=models.CASCADE)
     quantity_books = models.CharField(verbose_name="Quantidade", max_length=255, default=0)
     
-
+    class Meta:
+        app_label = 'books'
 

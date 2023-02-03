@@ -1,6 +1,6 @@
 from django.urls import path
-from apps.core import views
-from apps.books.views import BookListView, BookCreateView
+from core import views
+from books.views import BookListView, BookCreateView
 
 urlpatterns = [
     path('cadastro/', views.cadastro, name='cadastro'), 

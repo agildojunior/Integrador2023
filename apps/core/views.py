@@ -1,13 +1,13 @@
 from django.http.response import  HttpResponse
 from django.shortcuts import render, redirect
-from apps.books.models.book import Book_Cart
-from apps.account.models.user import User
+from books.models.book import Book_Cart
+from account.models.user import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.core.paginator import Paginator
-from apps.books.models import Book, Category
-from apps.books.models.cart import Cart
+from books.models import Book, Category
+from books.models.cart import Cart
 
 def cadastro(request):
     if request.method == 'GET':

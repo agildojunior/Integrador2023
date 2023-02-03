@@ -1,7 +1,7 @@
 from django.contrib import admin
-from apps.books.models.book import Book, Book_Cart
-from apps.books.models.category import Category
-from apps.books.models.cart import Cart
+from books.models.book import Book, Book_Cart
+from books.models.category import Category
+from books.models.cart import Cart
 
 # Register your models here.
 admin.site.register(Book)

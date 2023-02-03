@@ -10,7 +10,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name="E-mail", max_length=255, null=False, blank=False
     )
-    balance = models.CharField(verbose_name="Saldo", max_length=255)
+    balance = models.CharField(verbose_name="Saldo", max_length=255, null=True)
     phone = models.CharField(
         verbose_name="Telefone", max_length=50, null=False, blank=False
     )
@@ -27,3 +27,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+    class Meta:
+        app_label = "account"

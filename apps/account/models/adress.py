@@ -48,3 +48,6 @@ class Adress(models.Model):
 
     def __str__(self):
         return self.city
+    
+    class Meta:
+        app_label = "account"

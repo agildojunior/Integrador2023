@@ -1,6 +1,6 @@
 from django.forms import ModelForm, Select, ChoiceField
-from apps.books.models import Book, Category
-from apps.account.models import User
+from books.models import Book, Category
+from account.models import User
 
 class BookForm(ModelForm):
     def __init__(self, *args, **kwargs):

@@ -1,6 +1,6 @@
 from django.urls import path
-from apps.core.views import cadastro, carrinho, compras, deslogar, logar, inicio, perfil, livrosEdit,livrosEdit2, add_book_in_cart, delete_book_in_cart
-from apps.books.views import BookListView, BookCreateView, BookDeleteView
+from core.views import cadastro, carrinho, compras, deslogar, logar, inicio, perfil, livrosEdit,livrosEdit2, add_book_in_cart, delete_book_in_cart
+from books.views import BookListView, BookCreateView, BookDeleteView
 
 urlpatterns = [
     path('cadastro/', cadastro, name='cadastro'), 

@@ -1,6 +1,6 @@
-from apps.books.models.book import Book
-from apps.books.models.cart import Cart
-from apps.books.models.category import Category
+from books.models.book import Book
+from books.models.cart import Cart
+from books.models.category import Category
 
 
 __all__ = [

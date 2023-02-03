@@ -1,4 +1,4 @@
-from apps.transaction.models.transaction import Transaction
+from transaction.models.transaction import Transaction
 
 
 __all__ = [
