@@ -146,3 +146,12 @@ def delete_book_in_cart(request, id_book):
     cartBook.delete()
     
     return redirect('carrinho')
+
+
+@login_required
+def infoLivro(request, id):
+    book = Book.objects.get(id=id)
+    context = {
+        'livro':book,
+    }
+    return render(request, 'inicio/infoLivro.html',context)
