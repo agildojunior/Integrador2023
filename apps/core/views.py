@@ -78,7 +78,8 @@ def compras(request):
 
 # @login_required(login_url="/ifbook/login/")
 def perfil(request): 
-    return render(request, 'perfil/perfil.html')
+    user = request.user
+    return render(request, 'perfil/perfil.html',{'user':user})
 
 # @login_required(login_url="/ifbook/login/")
 def produtos(request): 

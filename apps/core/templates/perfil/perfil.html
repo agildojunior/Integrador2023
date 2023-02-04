@@ -25,22 +25,22 @@
                         <fieldset class="row gx-3">
                             <legend>Dados Pessoais</legend>
                             <div class="form-floating mb-3">
-                                <input class="form-control" type="text" id="txtNome" placeholder=" " autofocus />
+                                <input class="form-control" type="text" name="username" value="{{user.username}}" />
                                 <label for="txtNome">Nome</label>
                             </div>
-                            <div class="form-floating mb-3 col-md-6 col-xl-4">
-                                <input class="form-control" type="text" id="txtCPF" placeholder=" " />
-                                <label for="txtCPF">CPF</label>
+                            <div class="form-floating mb-3">
+                                <input class="form-control" type="text" name="name" value="{{user.name}}" />
+                                <label for="txtNome">CPF</label>
                             </div>
                         </fieldset>
                         <fieldset>
                             <legend>Contatos</legend>
                             <div class="form-floating mb-3 col-md-8">
-                                <input class="form-control" type="email" id="txtEmail" placeholder=" " />
+                                <input class="form-control" type="email" name="email" value="{{user.email}}" />
                                 <label for="txtEmail">E-mail</label>
                             </div>
                             <div class="form-floating mb-3 col-md-6">
-                                <input class="form-control" placeholder=" " type="text" id="txtTelefone" />
+                                <input class="form-control" value="" type="text" name="telefone" value="{{user.Telefone}}" />
                                 <label for="txtTelefone">Telefone</label>
                             </div>
                         </fieldset>
@@ -49,45 +49,36 @@
                         <fieldset class="row gx-3">
                             <legend>Endereço</legend>
                             <div class="form-floating mb-3 col-md-6 col-lg-6">
-                                <input class="form-control" type="text" id="txtCEP" placeholder=" " />
+                                <input class="form-control" type="text" name="cep" value="{{user.cep}}" />
                                 <label for="txtCEP">CEP</label>
                             </div>
                             <div class="form-floating mb-3 col-md-6 col-lg-6">
-                                <input class="form-control" type="text" id="Cidade" placeholder=" " />
+                                <input class="form-control" type="text" name="cidade" value="{{user.cidade}}" />
                                 <label for="Cidade">Cidade</label>
                             </div>
                             <div class="clearfix"></div>
                             <div class="form-floating mb-3 col-md-4">
-                                <input class="form-control" type="text" id="txtNumero" placeholder=" " />
+                                <input class="form-control" type="text" name="numero" value="{{user.numero}}" />
                                 <label for="txtNumero">Número</label>
                             </div>
                             <div class="form-floating mb-3 col-md-8">
-                                <input class="form-control" type="text" id="txtComplemento" placeholder=" " />
+                                <input class="form-control" type="text" name="complemento" value="{{user.complemento}}" />
                                 <label for="txtComplemento">Complemento</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" type="text" id="txtReferencia" placeholder=" " />
+                                <input class="form-control" type="text" name="referencia" value="{{user.referencia}}" />
                                 <label for="txtReferencia">Referência</label>
                             </div>
                         </fieldset>
+                        <br><br>
                         <fieldset class="row gx-3">
-                            <legend>Sua senha</legend>
-                            <div class="form-floating mb-3 col-lg-6">
-                                <input class="form-control" type="password" id="txtSenha" placeholder=" " />
-                                <label for="txtSenha">Senha</label>
-                            </div>
-                            <div class="form-floating mb-3 col-lg-6">
-                                <input class="form-control" id="txtConfirmacaoSenha" placeholder=" " />
-                                <label class="form-label" for="txtConfirmacaoSenha">Confirmação da Senha</label>
+                            <div class="mb-3 text-left">
+                                <input style="float: right;" type="button" value="Salvar Informações" class="btn btn-lg btn-dark" />
                             </div>
                         </fieldset>
                     </div>
                 </div>
-                <hr />
-                <div class="mb-3 text-left">
-                    <input type="button" value="Salvar" class="btn btn-lg btn-dark" />
-                </div>
-            
+                <hr/>
 
         </div>
     </main>
