@@ -18,19 +18,21 @@
         <div class="container">
             <div class="row">
                 {% for livro in livros %}
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card mb-4 shadow-sm">
-                        <img class="card-img-top" style="height: 225px; width: 100%; display: block;" src="{% static 'img/produto.png' %}">
+                        {%if livro.book_cover%}
+                            <img class="card-img-top" src="{{livro.book_cover.url}}" style="height: 225px; width: 100%; display: block">
+                        {%endif%}
+
                         <div class="card-body">
                             <a style="text-decoration: none; color: black;" href="{% url 'infoLivro' livro.id %}"><h5>{{livro.name}}</h5></a>
-                            <p class="card-text">{{livro.synopsis}}</p>
+                            <p class="card-text">{{livro.category}}</p>
                             <h6 class="card-text">R$: {{livro.price}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 {% csrf_token %}
                                 <div class="btn-group">
                                     <a type="button" class="btn btn-sm btn-outline-dark" href="{% url 'adicionarCarrinho' livro.id %}">Adicionar ao carrinho</a>
                                 </div>
-                                <small class="text-muted">{{livro.quantity}} disponiveis</small>
                             </div>
                         </div>
                     </div>

@@ -17,6 +17,7 @@ class BookForm(ModelForm):
             'quantity_pages',
             'book_cover',
             'status_book',
+            'author',
             'note',
             'year',
             'price',
