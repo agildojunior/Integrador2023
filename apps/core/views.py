@@ -8,6 +8,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator
 from books.models import Book, Category
 from books.models.cart import Cart
+from transaction.models.transaction import Book_Transaction, Transaction
 
 def cadastro(request):
     if request.method == 'GET':
@@ -74,7 +75,19 @@ def carrinho(request):
 
 # @login_required(login_url="/ifbook/login/")
 def compras(request): 
-    return render(request, 'compras/compras.html')
+    comprador = User.objects.get(id=request.user.id)
+    transactionUsuario = Transaction.objects.filter(comprador=comprador)
+    listaLivros = []
+    for transactions in transactionUsuario:
+        bookTransaction = Book_Transaction.objects.filter(transaction = transactions)
+        for books in bookTransaction:
+            listaLivros.append(books)
+            
+    context = {
+        'livros': listaLivros
+    }
+    
+    return render(request, 'compras/compras.html', context)
 
 # @login_required(login_url="/ifbook/login/")
 def perfil(request): 
@@ -156,3 +169,31 @@ def infoLivro(request, id):
         'livro':book,
     }
     return render(request, 'inicio/infoLivro.html',context)
+
+
+def make_transaction(request):
+    #pegar o usuario que está fazendo a transaction
+    comprador = User.objects.get(id=request.user.id)
+    #pegar o carrinho do usuario
+    carrinhoUsuario = Cart.objects.get(user=comprador)
+    #pega o livro do carrinho que o usuario quer comprar
+    carrinhoLivros = Book_Cart.objects.filter(cart=carrinhoUsuario).all()
+    
+    for livrosCarrinho in carrinhoLivros:
+
+        transaction = Transaction.objects.create(vendedor = livrosCarrinho.book.user, comprador=comprador)
+        transactionBook = Book_Transaction.objects.create(transaction = transaction, book = livrosCarrinho.book)
+        
+        book = Book.objects.get(id=livrosCarrinho.book.id)
+        book.quantity = int(book.quantity) - 1
+        book.save()
+        
+        transaction.save()
+        transactionBook.save()
+        
+    return redirect('compras')
+        
+    
+        
+        
+        
