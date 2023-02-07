@@ -9,6 +9,8 @@ from django.core.paginator import Paginator
 from books.models import Book, Category
 from books.models.cart import Cart
 from transaction.models.transaction import Book_Transaction, Transaction
+from django.db.models import Q
+
 
 def cadastro(request):
     if request.method == 'GET':
@@ -48,7 +50,7 @@ def logar(request):
 # @login_required(login_url="/ifbook/login/")
 def inicioCategoria(request, nome): 
     cat = Category.objects.get(name=nome)
-    livross = Book.objects.filter(category=cat.id).order_by('name')
+    livross = Book.objects.filter(category=cat.id).filter(~Q(quantity=0)).order_by('name')
     
     # --- paginação ---
     paginator1 = Paginator(livross, 12)
@@ -62,7 +64,7 @@ def inicioCategoria(request, nome):
 
 # @login_required(login_url="/ifbook/login/")
 def inicio(request): 
-    livross = Book.objects.filter().order_by('name')
+    livross = Book.objects.filter(~Q(quantity=0)).order_by('name')
     
     # --- paginação ---
     paginator1 = Paginator(livross, 12)
@@ -198,13 +200,15 @@ def make_transaction(request):
 
         transaction = Transaction.objects.create(vendedor = livrosCarrinho.book.user, comprador=comprador)
         transactionBook = Book_Transaction.objects.create(transaction = transaction, book = livrosCarrinho.book)
-        
+
         book = Book.objects.get(id=livrosCarrinho.book.id)
         book.quantity = int(book.quantity) - 1
         book.save()
-        
+
         transaction.save()
         transactionBook.save()
+
+        livrosCarrinho.delete()
         
     return redirect('compras')
         
