@@ -46,6 +46,21 @@ def logar(request):
             return render(request, 'login/login.html')
 
 # @login_required(login_url="/ifbook/login/")
+def inicioCategoria(request, nome): 
+    cat = Category.objects.get(name=nome)
+    livross = Book.objects.filter(category=cat.id).order_by('name')
+    
+    # --- paginação ---
+    paginator1 = Paginator(livross, 12)
+    page_number = request.GET.get('page')
+    page_obj1 = paginator1.get_page(page_number)
+
+    context = {
+        'livros': page_obj1,
+    }
+    return render(request, 'inicio/inicio.html', context)
+
+# @login_required(login_url="/ifbook/login/")
 def inicio(request): 
     livross = Book.objects.filter().order_by('name')
     

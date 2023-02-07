@@ -3,7 +3,7 @@
 <div>
     <div class=navegadortop>    
         <a href="{% url 'inicio' %}" class="opcaoTop" style="font-weight: bold; font-size: 17px;">IFBOOK</a>
-        <a class="opcaoTop">LIVROS EM OFERTA</a>
+        <a href="{% url 'inicio' %}" class="opcaoTop">LIVROS EM OFERTA</a>
     </div>
     <div class=navegador>    
         <a class="opcao" style="font-weight: bold; font-size: 30px; font-style: italic;">IFBOOK</a>
@@ -47,13 +47,13 @@
         </div>
     </div>
     <div class=navegadorbot>
-        <a class="opcaoBot" style="margin-left: 50px;">Livros</a>
-        <a class="opcaoBot">Quadrinhos</a>
-        <a class="opcaoBot">Terror</a>
-        <a class="opcaoBot">Aventura</a>
-        <a class="opcaoBot">Romance</a>
-        <a class="opcaoBot">Mangá</a>
-        <a class="opcaoBot">Literatura</a>
+        <a href="{% url 'inicioCategoria' 'Ação' %}" class="opcaoBot" style="margin-left: 50px;">Ação</a>
+        <a href="{% url 'inicioCategoria' 'Ação' %}" class="opcaoBot">Quadrinhos</a>
+        <a href="{% url 'inicioCategoria' 'Terror' %}" class="opcaoBot">Terror</a>
+        <a href="{% url 'inicioCategoria' 'Aventura' %}" class="opcaoBot">Aventura</a>
+        <a href="{% url 'inicioCategoria' 'Romance' %}" class="opcaoBot">Romance</a>
+        <a href="{% url 'inicioCategoria' 'Ação' %}" class="opcaoBot">Mangá</a>
+        <a href="{% url 'inicioCategoria' 'Ação' %}" class="opcaoBot">Literatura</a>
     </div>
 </div>
 {% endblock %}
