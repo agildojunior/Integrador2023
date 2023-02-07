@@ -94,16 +94,19 @@ def carrinho(request):
 def compras(request): 
     comprador = User.objects.get(id=request.user.id)
     transactionUsuario = Transaction.objects.filter(comprador=comprador)
-    listaLivros = []
+    listaLivrostran = []
     for transactions in transactionUsuario:
         bookTransaction = Book_Transaction.objects.filter(transaction = transactions)
         for books in bookTransaction:
-            listaLivros.append(books)
-            
+            listaLivrostran.append(books)
+    import pdb
+    livros = []
+    for listaLivros in listaLivrostran:
+        livrodalista = Book.objects.get(id=listaLivros.book.id)
+        livros.append(livrodalista)
     context = {
-        'livros': listaLivros
+        'livros': livros
     }
-    
     return render(request, 'compras/compras.html', context)
 
 # @login_required(login_url="/ifbook/login/")

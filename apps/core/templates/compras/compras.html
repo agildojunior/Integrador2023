@@ -19,36 +19,38 @@
             <br>
             <h1>Minhas Compras</h1>
                 <ul class="list-group mb-3">
-                    
+
+                    {% for livro in livros %}
                     <li class="list-group-item py-3">
                         <div class="row g-3">
                             <div class="col-4 col-md-3 col-lg-2">
                                 <a href="#">
-                                    <img src="{% static 'img/produto.png' %}" class="img-thumbnail">
+                                    <img src="{{livro.book_cover.url}}" class="img-thumbnail">
                                 </a>
                             </div>
                             <div class="col-8 col-md-9 col-lg-7 col-xl-8 text-left align-self-center">
                                 <h4>
                                     <b>
                                         <a href="#" class="text-decoration-none" style="color: #7522ac;">
-                                            O Segredo da fenix
+                                            {{livro.name}}
                                         </a>
                                     </b>
                                 </h4>
                                 <h5>
-                                    Este livro é muito dahora mano, pode comprar confia.
+                                    {{livro.synopsis}}
                                 </h5>
                             </div>
                             <div class="col-6 offset-6 col-sm-6 offset-sm-6 col-md-4 offset-md-8 col-lg-3 offset-lg-0 col-xl-2 align-self-center mt-3">
                                 <div class="text-end mt-2">
-                                    <span class="text-dark">Valor Item: R$ 00,00</span>
+                                    <span class="text-dark">Valor Item: R$ {{livro.price}}</span>
                                 </div>
                                 <div class="text-end mt-2">
-                                    <span class="text-success">Entregue</span>
+                                    <span class="text-success">Pedido a caminho</span>
                                 </div>
                             </div>
                         </div>
                     </li>
+                    {% endfor %}
 
                 </ul>
 
