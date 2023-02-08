@@ -1,5 +1,5 @@
 from django.urls import path
-from core.views import cadastro, carrinho, compras, deslogar, logar, inicio, make_transaction, perfil, livrosEdit,livrosEdit2, add_book_in_cart, delete_book_in_cart, infoLivro, inicioCategoria
+from core.views import cadastro, carrinho, compras, deslogar, logar, inicio, make_transaction, perfil, livrosEdit,livrosEdit2, add_book_in_cart, delete_book_in_cart, infoLivro, inicioCategoria, userEdit
 from books.views import BookListView, BookCreateView, BookDeleteView
 
 urlpatterns = [
@@ -10,6 +10,7 @@ urlpatterns = [
     path('infoLivro/<int:id>', infoLivro, name='infoLivro'),
     path('carrinho/', carrinho, name='carrinho'), 
     path('perfil/', perfil, name='perfil'),
+    path('userEdit/', userEdit, name='userEdit'),
     path('livros/', BookListView.as_view(), name='livros'),
     path('livros/adicionar', BookCreateView.as_view(), name='adicionarLivro'),
     path('livros/<pk>', BookDeleteView.as_view(), name='excluirLivro'),

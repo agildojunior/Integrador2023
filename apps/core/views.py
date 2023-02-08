@@ -2,6 +2,7 @@ from django.http.response import  HttpResponse
 from django.shortcuts import render, redirect
 from books.models.book import Book_Cart
 from account.models.user import User
+from account.models.adress import Adress
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -27,6 +28,8 @@ def cadastro(request):
 
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
+        Endereco = Adress.objects.create(user = user)
+        Endereco.save()
         carrinho = Cart.objects.create(user = user)
         carrinho.save()
 
@@ -112,7 +115,12 @@ def compras(request):
 # @login_required(login_url="/ifbook/login/")
 def perfil(request): 
     user = request.user
-    return render(request, 'perfil/perfil.html',{'user':user})
+    endereco = Adress.objects.filter(user=user.id).first()
+    context = {
+        'user':user,
+        'endereco':endereco,
+    }
+    return render(request, 'perfil/perfil.html',context)
 
 # @login_required(login_url="/ifbook/login/")
 def produtos(request): 
@@ -136,6 +144,7 @@ def livrosEdit(request, id):
         'category':category,
     }
     return render(request, 'book/editar_Livro.html',context)
+
 @login_required
 def livrosEdit2(request, id):
     # idcategoria = request.POST.get('categoria')
@@ -215,7 +224,30 @@ def make_transaction(request):
         
     return redirect('compras')
         
-    
+@login_required
+def userEdit(request):
+    user = request.user
+    username = request.POST.get('username')
+    Adress.objects.filter(user=user.id).update(
+        cep=request.POST.get('cep'),
+        city=request.POST.get('city'),
+        number=request.POST.get('number'),
+        street=request.POST.get('street'),
+        district=request.POST.get('district'),
+    )
+    # --- Verifica se o username ja existe ---
+    username2 = User.objects.filter(username=username).first()
+    if username != user.username:
+        if username2:
+            return HttpResponse('Esse usuario esta indisponivel')
+    # ----------------------------------------
+    User.objects.filter(id=user.id).update(
+        username=request.POST.get('username'),
+        email=request.POST.get('email'),
+        phone=request.POST.get('phone'),
+    )
+
+    return redirect('perfil')
         
         
         

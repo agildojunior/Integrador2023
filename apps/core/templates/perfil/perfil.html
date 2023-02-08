@@ -19,25 +19,26 @@
             <br>
             <h1>Informaçoes de Usuario</h1>
             <br>
-            
+            <form action="{% url 'userEdit' %}" method="post">
+                {% csrf_token %}
                 <div class="row">
                     <div class="col-sm-12 col-md-6">
                         <fieldset class="row gx-3">
                             <legend>Dados Pessoais</legend>
                             <div class="form-floating mb-3">
-                                <input class="form-control" type="text" name="username" value="{{user.username}}" />
+                                <input class="form-control" type="text" name="username" value="{{user.username}}" required/>
                                 <label for="txtNome">Nome</label>
                             </div>
                         </fieldset>
                         <fieldset>
                             <legend>Contatos</legend>
                             <div class="form-floating mb-3 col-md-8">
-                                <input class="form-control" type="email" name="email" value="{{user.email}}" />
+                                <input class="form-control" type="email" name="email" value="{{user.email}}" required/>
                                 <label for="txtEmail">E-mail</label>
                             </div>
                             <div class="form-floating mb-3 col-md-6">
-                                <input class="form-control" value="" type="text" name="telefone" value="{{user.Telefone}}" />
-                                <label for="txtTelefone">Telefone</label>
+                                <input class="form-control" type="text" name="phone" value="{{user.phone}}" />
+                                <label for="txtphone">Telefone</label>
                             </div>
                         </fieldset>
                     </div>
@@ -45,37 +46,37 @@
                         <fieldset class="row gx-3">
                             <legend>Endereço</legend>
                             <div class="form-floating mb-3 col-md-6 col-lg-6">
-                                <input class="form-control" type="text" name="cep" value="{{user.cep}}" />
+                                <input class="form-control" type="text" name="cep" value="{{endereco.cep}}" />
                                 <label for="txtCEP">CEP</label>
                             </div>
                             <div class="form-floating mb-3 col-md-6 col-lg-6">
-                                <input class="form-control" type="text" name="cidade" value="{{user.cidade}}" />
+                                <input class="form-control" type="text" name="city" value="{{endereco.city}}" />
                                 <label for="Cidade">Cidade</label>
                             </div>
                             <div class="clearfix"></div>
                             <div class="form-floating mb-3 col-md-4">
-                                <input class="form-control" type="text" name="numero" value="{{user.numero}}" />
+                                <input class="form-control" type="text" name="number" value="{{endereco.number}}" />
                                 <label for="txtNumero">Número</label>
                             </div>
                             <div class="form-floating mb-3 col-md-8">
-                                <input class="form-control" type="text" name="complemento" value="{{user.complemento}}" />
-                                <label for="txtComplemento">Complemento</label>
+                                <input class="form-control" type="text" name="street" value="{{endereco.street}}" />
+                                <label for="txtRua">Rua</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input class="form-control" type="text" name="referencia" value="{{user.referencia}}" />
+                                <input class="form-control" type="text" name="district" value="{{endereco.district}}" />
                                 <label for="txtReferencia">Referência</label>
                             </div>
                         </fieldset>
                         <br><br>
                         <fieldset class="row gx-3">
                             <div class="mb-3 text-left">
-                                <input style="float: right;" type="button" value="Salvar Informações" class="btn btn-lg btn-dark" />
+                                <button style="float: right;" type="submit" class="btn btn-lg btn-dark">Salvar Informações</button>
                             </div>
                         </fieldset>
                     </div>
                 </div>
                 <hr/>
-
+            </form>
         </div>
     </main>
 
