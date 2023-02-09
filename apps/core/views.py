@@ -67,8 +67,13 @@ def inicioCategoria(request, nome):
 
 # @login_required(login_url="/ifbook/login/")
 def inicio(request): 
-    livross = Book.objects.filter(~Q(quantity=0)).order_by('name')
-    
+    if request.method == 'POST':
+        pesquisa = request.POST.get('pesquisa')
+    else:
+        pesquisa = ''
+
+    livross = Book.objects.filter(~Q(quantity=0)).filter(name__contains=pesquisa).order_by('name')
+
     # --- paginação ---
     paginator1 = Paginator(livross, 12)
     page_number = request.GET.get('page')

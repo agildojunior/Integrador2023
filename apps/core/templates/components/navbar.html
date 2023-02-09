@@ -7,7 +7,10 @@
     </div>
     <div class=navegador>    
         <a class="opcao" style="font-weight: bold; font-size: 30px; font-style: italic;">IFBOOK</a>
-        <input type="text" class="form-control" style="width: 46%; border-color: white; border-radius: 40px;" id="pesquisa" placeholder="Qual livro você procura?">
+        <form action="{% url 'inicio' %}" style="width: 46%" method="post">
+            {% csrf_token %}
+            <input type="text" class="form-control" style="width: 100%; border-color: white; border-radius: 40px;" name="pesquisa" placeholder="Qual livro você procura?">
+        </form>
         <div>
             <div style="display: flex;">
                 {% if user.username %}
