@@ -8,4 +8,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ifbook/', include('books.urls')),
     path('', views.inicio, name='inicio'),
+    path('api/books/', include('books.urls')), #rota da api
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,6 +4,12 @@ from django.views.generic import TemplateView, DetailView, CreateView, UpdateVie
 from books.models import Book
 from books.forms import BookForm
 
+# ---para a API--- #
+from rest_framework import generics
+from .serializers import BookSerializer
+# ---/para a API--- #
+
+
 class BookListView(TemplateView):
     template_name = "book/livro.html"
 
@@ -41,3 +47,14 @@ class BookDeleteView(DeleteView):
     template_name = "book/apaga_livro.html"
     success_url = reverse_lazy('livros')
     
+
+
+# ---para a API--- #
+class BookListCreate(generics.ListCreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
+class BookRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+# ---/para a API--- #

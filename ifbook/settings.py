@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'account',
     'books',
     'transaction',
-    
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
