@@ -7,4 +7,7 @@ class Cart(models.Model):
     )
     quantity_books = models.CharField(verbose_name="Quantidade", max_length=255, default=0)
     book = models.ManyToManyField("Book", through='Book_Cart')
+    
+    def __str__(self):
+        return self.user
 

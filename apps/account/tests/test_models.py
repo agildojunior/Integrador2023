@@ -1,7 +1,7 @@
 from account.tests import test_base_user
 from account.tests.factories import UserFactory, AdressFactory
 
-class UserTestModels(test_base_user.UserTestModels):
+class UserTestModels(test_base_user.UserTestBase):
     def setUp(self):
         self.user = self.create_user()
         self.adress = self.create_adress()

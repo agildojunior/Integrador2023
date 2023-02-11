@@ -3,7 +3,7 @@ from .factories import UserFactory
 from account.models.user import User
 from account.models.adress import Adress
 
-class UserTestModels(TestCase):
+class UserTestBase(TestCase):
     def setUp(self) -> None:
         return super().setUp()
 
