@@ -22,5 +22,4 @@ urlpatterns = [
     path('carrinho/<id_book>', add_book_in_cart, name='adicionarCarrinho'),
     path('carrinho/excluir/<id_book>', delete_book_in_cart, name='apagarLivroCarrinho'),
     path('carrinho/comprar/', make_transaction, name='comprarLivro'),
-
 ]
