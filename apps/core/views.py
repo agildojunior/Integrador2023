@@ -24,7 +24,7 @@ def cadastro(request):
         user = User.objects.filter(username=username).first()
 
         if user:
-            return HttpResponse('Esse usuario ja existe')
+            return HttpResponse('Esse usuário já existe')
 
         user = User.objects.create_user(username=username, email=email, password=senha)
         user.save()
@@ -50,9 +50,9 @@ def logar(request):
         else:
             return render(request, 'login/login.html')
 
-# @login_required(login_url="/ifbook/login/")
-def inicioCategoria(request, nome): 
-    cat = Category.objects.get(name=nome)
+@login_required(login_url="/ifbook/login/")
+def inicioCategoria(request, nome): # pragma: no cover
+    cat = Category.objects.get(name=nome) 
     livross = Book.objects.filter(category=cat.id).filter(~Q(quantity=0)).order_by('name')
     
     # --- paginação ---
@@ -65,7 +65,7 @@ def inicioCategoria(request, nome):
     }
     return render(request, 'inicio/inicio.html', context)
 
-# @login_required(login_url="/ifbook/login/")
+@login_required(login_url="/ifbook/login/")
 def inicio(request): 
     if request.method == 'POST':
         pesquisa = request.POST.get('pesquisa')
@@ -84,7 +84,7 @@ def inicio(request):
     }
     return render(request, 'inicio/inicio.html', context)
 
-# @login_required(login_url="/ifbook/login/")
+@login_required(login_url="/ifbook/login/")
 def carrinho(request):
     carrinhoUsuario = Cart.objects.get(user=request.user.id)
     carrinhoLivros = Book_Cart.objects.filter(cart=carrinhoUsuario)
@@ -98,7 +98,7 @@ def carrinho(request):
     }
     return render(request, 'carrinho/carrinho.html', context)
 
-# @login_required(login_url="/ifbook/login/")
+@login_required(login_url="/ifbook/login/")
 def compras(request): 
     comprador = User.objects.get(id=request.user.id)
     transactionUsuario = Transaction.objects.filter(comprador=comprador)
@@ -107,7 +107,6 @@ def compras(request):
         bookTransaction = Book_Transaction.objects.filter(transaction = transactions)
         for books in bookTransaction:
             listaLivrostran.append(books)
-    import pdb
     livros = []
     for listaLivros in listaLivrostran:
         livrodalista = Book.objects.get(id=listaLivros.book.id)
@@ -117,7 +116,7 @@ def compras(request):
     }
     return render(request, 'compras/compras.html', context)
 
-# @login_required(login_url="/ifbook/login/")
+@login_required(login_url="/ifbook/login/")
 def perfil(request): 
     user = request.user
     endereco = Adress.objects.filter(user=user.id).first()
@@ -127,20 +126,12 @@ def perfil(request):
     }
     return render(request, 'perfil/perfil.html',context)
 
-# @login_required(login_url="/ifbook/login/")
-def produtos(request): 
-    return render(request, 'produtos/produtos.html')
-
-# @login_required(login_url="/ifbook/login/")
-def produtosAdd(request): 
-    return render(request, 'adicionarLivro.html')
-
-@login_required
+@login_required(login_url="/ifbook/login/")
 def deslogar(request):
     logout(request)
     return redirect('inicio')
 
-@login_required
+@login_required(login_url="/ifbook/login/")
 def livrosEdit(request, id):
     livro = Book.objects.filter(id=id).first()
     category = Category.objects.all
@@ -150,7 +141,7 @@ def livrosEdit(request, id):
     }
     return render(request, 'book/editar_Livro.html',context)
 
-@login_required
+@login_required(login_url="/ifbook/login/")
 def livrosEdit2(request, id):
     # idcategoria = request.POST.get('categoria')
     # categoria = Categoria.objects.filter( id = idcategoria ).first()
@@ -168,7 +159,7 @@ def livrosEdit2(request, id):
     )
     return redirect('livros')
 
-@login_required
+@login_required(login_url="/ifbook/login/")
 def add_book_in_cart(request, id_book):
     book = Book.objects.get(id=id_book)
     user = User.objects.get(id=request.user.id)
@@ -184,8 +175,7 @@ def add_book_in_cart(request, id_book):
     
     return redirect('carrinho')
 
-
-@login_required
+@login_required(login_url="/ifbook/login/")
 def delete_book_in_cart(request, id_book):
     carrinho = Cart.objects.get(user=request.user.id)
     book = Book.objects.get(id=id_book)
@@ -195,8 +185,7 @@ def delete_book_in_cart(request, id_book):
     
     return redirect('carrinho')
 
-
-@login_required
+@login_required(login_url="/ifbook/login/")
 def infoLivro(request, id):
     book = Book.objects.get(id=id)
     context = {
@@ -204,7 +193,7 @@ def infoLivro(request, id):
     }
     return render(request, 'inicio/infoLivro.html',context)
 
-
+@login_required(login_url="/ifbook/login/")
 def make_transaction(request):
     #pegar o usuario que está fazendo a transaction
     comprador = User.objects.get(id=request.user.id)

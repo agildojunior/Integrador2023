@@ -1,51 +1,50 @@
-from django.test import TestCase
+import factory
+from factory import Faker, SubFactory
+from factory.django import DjangoModelFactory
+from books.models.book import Book
+from books.models.category import Category
+from books.models.cart import Cart
+
 from account.tests.factories import UserFactory
 
-from books.models.book import Book
-from books.models.cart import Cart
-from books.models.category import Category
-from .factories import BookFactory, CategoryFactory
-
-
-class BooksTestBase(TestCase):
-    def setUp(self) -> None:
-        return super().setUp()
-
-    def tearDown(self) -> None:
-        return super().tearDown()
-
-    def create_book(self):
-        user = UserFactory()
-        category = CategoryFactory()
-        book = Book.objects.create(
-            name = "Livro Teste",
-            quantity_pages = "100",
-            cover_book = None,
-            status_book = "Usado",
-            author = "Autor Teste",
-            note = "Está com a capa arranhada",
-            year = "2010",
-            price = "100",
-            quantity = "2",
-            synopsis = "Conta a história de alunos sofredores do IFRN do curso de ADS no Campus Pau dos Ferros",
-            publishing_company = "IFRN",
-            category = category,
-            user = user,
-        )
-        return book
+class CategoryFactory(DjangoModelFactory):
+    class Meta:
+        model= Category
         
-    def create_category(self):
-        category = Category.objects.create(
-           name = "Teste Categoria"
-        )
-        return category
+    name = Faker("word")
+
+class BookFactory(DjangoModelFactory):
+    class Meta:
+        model = Book
+
+    name = Faker("name")
+    quantity_pages = Faker("building_number")
+    status_book = Faker("random_element", elements=(
+            "Novo", "Usado", "Seminovo"
+        ))
+    book_cover = None
+    author = Faker("name")
+    note = Faker("text")
+    year = Faker("year")
+    price = Faker("building_number")
+    quantity = Faker("building_number")
+    synopsis = Faker("text")
+    publishing_company = Faker("name")
+    category = SubFactory(CategoryFactory)
+    user = SubFactory(UserFactory)
     
-    def create_cart(self):
-        user = UserFactory()
-        book = BookFactory()
-        cart = Cart.objects.create(
-            user = user,
-            book = book
-        )
+class CartFactory(DjangoModelFactory):
+    class Meta:
+        model = Cart
         
-        return cart
+    user = SubFactory(UserFactory)
+    book = SubFactory(BookFactory)
+    
+    @factory.post_generation # pragma: no cover
+    def book(self, create, extracted, **kwargs):
+        if not create:
+            return
+        if extracted:
+            # Estamos passando uma lista de autores para o livro
+            for book in extracted:
+                self.book.add(book)

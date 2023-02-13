@@ -1,7 +1,7 @@
-from transaction.tests import test_base_transaction
-from transaction.tests.factories import TransactionFactory
+from django.test import TestCase
+from transaction.tests.test_base_transaction import TransactionFactory
 
-class TransactionTestModels(test_base_transaction.TransactionTestBase):
+class TransactionTestModels(TestCase):
        
     def setUp(self):
         self.transaction = TransactionFactory()

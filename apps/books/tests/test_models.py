@@ -1,7 +1,7 @@
-from books.tests import test_base_books
-from books.tests.factories import BookFactory, CartFactory, CategoryFactory
+from django.test import TestCase
+from books.tests.test_base_books import BookFactory, CartFactory, CategoryFactory
 
-class BookTestModels(test_base_books.BooksTestBase):
+class BookTestModels(TestCase):
        
     def setUp(self):
         self.book = BookFactory()

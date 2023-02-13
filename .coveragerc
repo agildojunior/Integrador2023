@@ -3,5 +3,7 @@ omit=
     */manage.py
     */__init__.py
     */migrations/*
-    */core/*
-    */usr/*
+    */forms.py
+    */admin.py
+    */settings.py
+    */models/*

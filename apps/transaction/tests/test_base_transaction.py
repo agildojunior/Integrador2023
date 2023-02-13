@@ -1,24 +1,25 @@
-from django.test import TestCase
+import factory
+from factory import Faker, SubFactory
+from factory.django import DjangoModelFactory
+from books.tests.test_base_books import BookFactory
 from account.tests.factories import UserFactory
-from books.tests.factories import BookFactory
 
 from transaction.models.transaction import Transaction
 
 
-class TransactionTestBase(TestCase):
-    def setUp(self) -> None:
-        return super().setUp()
-
-    def tearDown(self) -> None:
-        return super().tearDown()
-
-    def create_transaction(self):
-        comprador = UserFactory()
-        vendedor = UserFactory()
-        book = BookFactory()
-        transaction = Transaction.objects.create(
-            comprador = comprador,
-            vendedor = vendedor,
-            book = book
-        )
-        return transaction
+class TransactionFactory(DjangoModelFactory):
+    class Meta:
+        model= Transaction
+       
+    vendedor = SubFactory(UserFactory)
+    comprador = SubFactory(UserFactory)
+    book = SubFactory(BookFactory)
+    
+    @factory.post_generation # pragma: no cover
+    def book(self, create, extracted, **kwargs):
+        if not create:
+            return
+        if extracted:
+            # Passando uma lista de livros para tabela "livros"
+            for book in extracted:
+                self.book.add(book)
